@@ -359,6 +359,20 @@ const NavbarTwo = () => {
 	}, [currency])
 
 	console.log("currencies", currencies);
+
+
+	const connectWallet = async () => {
+		try {
+			if (window.ethereum) {
+				const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+				console.log('Connected account:', accounts[0]);
+			} else {
+				alert('Please install MetaMask!');
+			}
+		} catch (error) {
+			console.log(error)
+		}
+	}
 	return (
 		<>
 			<div
@@ -652,6 +666,7 @@ const NavbarTwo = () => {
 										></img>
 									)
 								}
+								<button className="border px-3 py-2" onClick={connectWallet}>Connect <br /> Wallet</button>
 								<div className="justify-content-center cursor-pointer d-flex  d-lg-none align-items-center">
 									<RxHamburgerMenu
 										onClick={() => {
